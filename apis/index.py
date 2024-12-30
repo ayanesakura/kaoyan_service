@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 from school_search import app as school_app
+from school_analysis import app as analysis_app
 from utils.file_util import get_host_ip
 
 # 创建主应用
@@ -8,6 +9,7 @@ app = FastAPI(title="考研服务API")
 
 # 挂载子应用
 app.mount("/school", school_app)
+app.mount("/analysis", analysis_app)
 
 @app.get("/")
 async def root():
