@@ -34,13 +34,14 @@ for item in major_data:
     if major not in school_structure[school][college]:
         school_structure[school][college].append(major)
 
-@app.get("/search")
-async def search_schools(query: str) -> List[dict]:
+@app.post("/search")
+async def search_schools(request: dict) -> List[dict]:
     """
     搜索学校接口
-    :param query: 搜索关键词
+    :param request: 请求体,包含query字段作为搜索关键词
     :return: 匹配的学校列表
     """
+    query = request.get('query', '')
     if not query:
         raise HTTPException(status_code=400, detail="搜索关键词不能为空")
         
